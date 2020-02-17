@@ -1,0 +1,39 @@
+<div class="main-div backgroundGray">
+  <mat-card>
+    <mat-card-header>
+      <h2>Register</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field [formGroup]="loginForm">
+        <tr>
+          <td>
+            <input matInput placeholder="Name" type="text" formControlName="displayName" class="form-control" required/>
+          </td>
+        </tr>
+      </mat-form-field>
+      <br>
+      <mat-form-field [formGroup]="loginForm">
+        <tr>
+          <td>
+            <input matInput placeholder="Email" type="text" formControlName="email" class="form-control" required/>
+          </td>
+        </tr>
+      </mat-form-field>
+      <br>
+      <mat-form-field [formGroup]="loginForm">
+        <tr>
+          <td>
+            <input matInput placeholder="Password" type="password" formControlName="password" class="form-control" required/>
+          </td>
+        </tr>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button type="submit" (click)="auth.normalRegister(email.value,password.value,displayName.value)">
+        Connect
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
