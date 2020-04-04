@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../services/auth.service";
+import {AuthService} from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-user-add',
@@ -9,7 +9,6 @@ import {AuthService} from "../services/auth.service";
 })
 export class UserAddComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
 
   constructor(private formBuilder: FormBuilder,private auth: AuthService) { }
 

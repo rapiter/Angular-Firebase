@@ -10,6 +10,7 @@
         <input matInput placeholder="Email" type="text" formControlName="username" class="form-control" required/>
         </td>
       </tr>
+
      </mat-form-field>
      <br>
      <mat-form-field [formGroup]="loginForm">
@@ -27,6 +28,11 @@
   <button mat-flat-button (click)="auth.googleSignin()">
    <i class="fa fa-google"></i> Connect Google
   </button>
+
+    <button mat-flat-button (click)="auth.requestNewPassword(username.value)">
+      <i class="fa fa-google"></i> Forgot password?
+    </button>
+
 </mat-card-actions>
 </mat-card>
 </div>

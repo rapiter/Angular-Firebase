@@ -6,10 +6,8 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {environment} from "../environments/environment";
-import { UserAddComponent } from './user-add/user-add.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,16 +15,25 @@ import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import { ControlpanelComponent } from './controlpanel/controlpanel.component';
+import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
 
 const config = environment.firebase;
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     UserProfileComponent,
-    UserAddComponent,
     MainpageComponent,
+    ControlpanelComponent,
+    UserEditComponent,
+    ProductListComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +47,12 @@ const config = environment.firebase;
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatListModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

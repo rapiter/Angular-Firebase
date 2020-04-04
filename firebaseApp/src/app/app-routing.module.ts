@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {UserProfileComponent} from "./user-profile/user-profile.component";
-import {UserAddComponent} from "./user-add/user-add.component";
 import {MainpageComponent} from "./mainpage/mainpage.component";
-import {LoginComponent} from "./login/login.component";
-
+import {AdminGuard} from "./authentication/admin.guard";
+import {CanReadGuard} from "./authentication/can-read.guard";
+import {ControlpanelComponent} from "./controlpanel/controlpanel.component";
+import {UserEditComponent} from "./user-edit/user-edit.component";
+import {ProductListComponent} from "./product/product-list/product-list.component";
 
 const routes: Routes = [{
   path: '', component: MainpageComponent, pathMatch: 'full'},
-  {path: 'profile', component: UserProfileComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: UserAddComponent}];
+  {path: 'cp', component: ControlpanelComponent, canActivate: [AdminGuard]},
+  {path: 'profile', component: UserProfileComponent, canActivate: [CanReadGuard]},
+  {path: 'profile-edit', component: UserEditComponent, canActivate: [CanReadGuard]},
+  {path: 'products', component: ProductListComponent, canActivate: [CanReadGuard]},
+
+
+  { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -6,7 +6,8 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
+    "src/app/shared/services/functions/node_modules/@types/jest/index.d.ts"
   ],
   "include": [
     "src/**/*.ts"

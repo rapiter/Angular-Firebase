@@ -1,0 +1,22 @@
+<div class="main-div backgroundGray">
+  <mat-card>
+    <mat-list *ngFor="let product of products | async">
+
+      <mat-card>
+        <mat-card-title>
+            {{product.name}}
+        </mat-card-title>
+        <mat-card-content>
+          <p>
+            {{product.weight}} grams
+          </p>
+          <p>
+            {{product.price | currency}}
+          </p>
+        </mat-card-content>
+        <button mat-raised-button (click)="addProduct(product)">Buy</button>
+      </mat-card>
+
+    </mat-list>
+  </mat-card>
+</div>

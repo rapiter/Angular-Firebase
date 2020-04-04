@@ -1,0 +1,23 @@
+<div class="main-div backgroundGray">
+<mat-card>
+  <mat-list *ngFor="let user of users | async">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+         <mat-list-item>
+            <h5 mat-line>{{user.displayName}}</h5>
+          </mat-list-item>
+      </mat-expansion-panel-header>
+      <mat-list style="margin-left:30px;">
+        <mat-list-item>
+          <p mat-line>UID: {{user.uid}}</p>
+          <p mat-line>MAIL: {{user.email}}</p>
+          <p mat-line>{{user.roles.admin}}</p>
+
+          <button mat-button (click)="this.deleteUser(user.uid)">DELETE</button>
+        </mat-list-item>
+      </mat-list>
+
+    </mat-expansion-panel>
+</mat-list>
+</mat-card>
+</div>

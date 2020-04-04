@@ -1,7 +1,12 @@
-
+<div class="main-div backgroundGray">
+  <mat-card>
   <div *ngIf="auth.user$ | async as user">
     <h3>Howdy, {{ user.displayName }}</h3>
     <p>UID: {{ user.uid }}</p>
     <p>Email: {{user.email}}</p>
     <button (click)="auth.signOut()">Logout</button>
+    <button *ngIf="user.roles.admin" routerLink="/cp">Control Panel</button>
+    <button routerLink="/profile-edit">Edit profile</button>
+
   </div>
+  </mat-card>

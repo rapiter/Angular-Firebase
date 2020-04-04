@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth.service";
+import {AuthService} from "../services/auth/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -9,7 +9,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
 
   constructor(private formBuilder: FormBuilder,private auth: AuthService) {
   }
@@ -25,5 +24,11 @@ export class LoginComponent implements OnInit {
   get username() { return this.loginForm.get('username'); }
   get password() { return this.loginForm.get('password'); }
 
-
+  resetPassword() {
+    if (!this.username) {
+      alert('Type in your email first');
+    }
+    this.auth.requestNewPassword(this.username.value)
+    alert('Password sent to mail')
+  }
 }

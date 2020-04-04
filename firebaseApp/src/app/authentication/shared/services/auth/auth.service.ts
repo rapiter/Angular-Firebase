@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {User} from "../shared/user.model";
+import {User} from "../../../../shared/user.model";
 import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {auth} from "firebase";
 
 @Injectable({
@@ -57,17 +57,39 @@ export class AuthService {
     });
   }
 
-  private updateUserData(user) {
-    // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<User> = this.angFirestore.doc(`users/${user.uid}`);
+  private chkAuthZ(user: User, allowRoles: string[]): boolean {
+    if(!user) return false
+    for(const role of allowRoles){
+      if(user.roles[role]){
+        return true;
+      }
+    }
+    return false;
+  }
 
+  canRead(user: User): boolean{
+    const allowed =['admin', 'normal']
+    return this.chkAuthZ(user,allowed);
+  }
+
+  canEdit(user: User): boolean{
+    const allowed =['admin', 'normal']
+    return this.chkAuthZ(user,allowed);
+  }
+
+  canDelete(user: User): boolean{
+    const allowed =['admin']
+    return this.chkAuthZ(user,allowed);
+  }
+
+  private updateUserData(user) {
+    const userRef: AngularFirestoreDocument<User> = this.angFirestore.doc(`users/${user.uid}`);
     const data = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
     }
-
     return userRef.set(data, { merge: true })
   }
 
@@ -75,5 +97,22 @@ export class AuthService {
     await this.angFireAuth.auth.signOut();
     this.router.navigate(['/']);
   }
+
+  editUserData(user: User){
+    this.angFirestore.collection('users').doc(this.angFireAuth.auth.currentUser.uid).set(
+      {
+          description: user.description
+      }
+    )
+  }
+
+  requestNewPassword(email: string){
+    this.angFireAuth.auth.sendPasswordResetEmail(email).then(function()
+    {
+      alert("Email sent to typed email");
+    }).catch(function (error){
+        alert("Email doesn't exist");
+    });
+    }
 
 }
