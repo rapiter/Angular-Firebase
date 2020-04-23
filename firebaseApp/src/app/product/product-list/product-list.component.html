@@ -13,10 +13,13 @@
           <p>
             {{product.price | currency}}
           </p>
+          <button mat-icon-button (click)="setSelectedProduct(product)">Edit</button>
+
+          <button mat-icon-button (click)="this.deleteProduct(product.uid)">Delete</button>
         </mat-card-content>
-        <button mat-raised-button (click)="addProduct(product)">Buy</button>
       </mat-card>
 
     </mat-list>
+  <button mat-raised-button routerLink="/product-add">New product</button>
   </mat-card>
 </div>

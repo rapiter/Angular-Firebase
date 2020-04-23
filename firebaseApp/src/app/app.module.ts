@@ -23,6 +23,13 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
+import {NgxsModule} from "@ngxs/store";
+import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+import {NgxsLoggerPluginModule} from "@ngxs/logger-plugin";
+import { ProductAddComponent } from './product/product-add/product-add.component';
+import {ProductState} from "./states/product.state";
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
+
 
 const config = environment.firebase;
 
@@ -34,6 +41,8 @@ const config = environment.firebase;
     ControlpanelComponent,
     UserEditComponent,
     ProductListComponent,
+    ProductAddComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,10 @@ const config = environment.firebase;
     MatIconModule,
     MatExpansionModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgxsModule.forRoot([ProductState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

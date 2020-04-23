@@ -12,6 +12,12 @@ admin.initializeApp({
 exports.deleteUser = functions.firestore.document('users/{userId}').onDelete((snap, context) => {
   return admin.auth().deleteUser(snap.id).then( () => console.log('USER DELETED (ID: ' + snap.id)).catch((error) => console.error('Deleting user failed'))
 })
+/*
+exports.setRoles = functions.firestore.document('users/{userId}').onCreate((snap, context)=>{
+  return admin.firestore().collection('users').doc('users/{userId}').update()
+})
+
+ */
 
 exports.defaultStock = functions.firestore.document('products/{prodId}').onCreate((snap, context)=>{
   return difa.getProductController().written(snap,context)
